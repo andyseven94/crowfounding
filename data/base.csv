@@ -1,0 +1,2 @@
+engine,name,user,password,host,port
+django.db.backends.postgresql,crownfunding_db,postgres,postgres,localhost,5433

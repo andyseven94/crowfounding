@@ -1,0 +1,101 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EELA Store</title>
+    <meta name="description" content="Crownfunding web application">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{% static 'img/icon.png'%}" type= "image/x-icon">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+            </a>
+      
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+              <li><a href="#" class="nav-link px-2 link-dark">Quiénes somos</a></li>
+              <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>              
+            </ul>
+      
+            <div class="col-md-3 text-end">
+                {% comment %} {% if user.is_authenticated %}
+                    <a href = "#" class = 'nav-link nav-link-emphasis px-2'>Bienvenido {{user.username}}</a>
+                    <a href = "{% url 'logout' %}" class = "nav-link nav-link-emphasis px-2">Logout</a>
+                {%else%} {% endcomment %}
+
+                    <a href="#" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="#" class="btn btn-primary">Sign-up</a>
+                {% comment %} {%endif%} {% endcomment %}
+            </div>
+        </header>
+
+        <!--Navegacion-->
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Categorias</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {%for item in lista_categorias%}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">{{item.nombre_categoria}}</a>
+                        </li>
+                    {%endfor%}
+                </ul>
+                <form class="d-flex" role="search">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+        </nav>
+
+        <main>
+            {{cat_cam}}
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                {%for item in lista_campanias %}
+                    
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://aptira.com/wp-content/uploads/2015/03/img.gif" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.nombre_campania}}</h5>
+                                <p class="card-text">{{item.descripcion_campania}}</p>
+                                
+                                <h6><span class="badge bg-secondary">Categoria</span></h6>
+                                
+                                <div class="row">
+                                    <div class="col-3">
+                                        <h6>AVANCE:</h6>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated overflow-visible " style="width: 25%">$2000 / $8000</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex justify-content-between">                    
+                                    <a class="btn btn-primary small">Abonar</a>                        
+                                </div>
+                            </div>     
+                        </div>
+                    </div>
+                {%endfor%}    
+            </div>
+        </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
